@@ -6,15 +6,27 @@ export default function App() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setArticleName((currenState) => [...currenState, productName]);
+    {
+      productName &&
+        setArticleName((currentState) => [...currentState, productName]);
+    }
     setProductName("");
+  };
+
+  const articleDelete = (indexToDelete) => {
+    setArticleName((currentState) =>
+      currentState.filter((article, index) => index !== indexToDelete)
+    );
   };
   return (
     <>
       <h1>Lista Articoli</h1>
       <ul>
         {articleName.map((article, index) => (
-          <li key={index}>{article}</li>
+          <li key={index}>
+            {article}
+            <button onClick={() => articleDelete(index)}>&#9746;</button>
+          </li>
         ))}
       </ul>
       <h3>Aggiungi articoli</h3>
